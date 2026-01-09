@@ -25,6 +25,10 @@ body {
   font-family: var(--font-sans), sans-serif;
 }
 
+.font-anton {
+  font-family: var(--font-anton), sans-serif;
+}
+
 .bg-coverge {
   background-image:
     radial-gradient(circle at top left, rgba(72, 103, 255, 0.35), transparent 55%),

@@ -50,8 +50,8 @@ export default function Home() {
 
         <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-16 px-6 pb-16 pt-10 sm:px-10">
           <header className="flex items-center justify-between gap-4 fade-up">
-            <a className="text-3xl font-semibold tracking-tight" href="/">
-              Coverge
+            <a className="font-anton text-3xl tracking-tight" href="/">
+              COVERGE
             </a>
             <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
               <a

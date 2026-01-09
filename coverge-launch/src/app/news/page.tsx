@@ -42,16 +42,16 @@ export default function NewsPage() {
       </div>
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-10 px-6 pb-20 pt-12 sm:px-10">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <header className="flex items-center gap-4">
           <div className="flex items-center gap-3">
-            <span className="text-3xl font-semibold tracking-tight">
+            <a className="font-anton text-3xl tracking-tight" href="/">
               Coverge
-            </span>
+            </a>
             <span className="hidden rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/70 sm:inline">
               News
             </span>
           </div>
-          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+          <div className="ml-auto flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
             <a
               className="rounded-full border border-white/15 bg-white/5 px-4 py-2 transition hover:bg-white/10"
               href="/"
