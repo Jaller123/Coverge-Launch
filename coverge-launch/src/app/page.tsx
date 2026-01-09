@@ -49,7 +49,7 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-16 px-6 pb-16 pt-10 sm:px-10">
-          <header className="flex items-center justify-between fade-up">
+          <header className="flex flex-col gap-4 fade-up sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <span className="text-3xl font-semibold tracking-tight">
                 Coverge
@@ -58,9 +58,23 @@ export default function Home() {
                 Coming soon
               </span>
             </div>
-            <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/60">
-              Private beta
-            </span>
+            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+              <a
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 transition hover:bg-white/10"
+                href="/news"
+              >
+                News
+              </a>
+              <a
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 transition hover:bg-white/10"
+                href="/contact"
+              >
+                Contact
+              </a>
+              <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white/60">
+                Private beta
+              </span>
+            </div>
           </header>
 
           <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 lg:p-12">
@@ -178,6 +192,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+
 
           <footer className="flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center fade-up fade-delay-3">
             <span>(c) 2026 Coverge</span>
