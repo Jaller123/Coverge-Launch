@@ -49,16 +49,11 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-16 px-6 pb-16 pt-10 sm:px-10">
-          <header className="flex flex-col gap-4 fade-up sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl font-semibold tracking-tight">
-                Coverge
-              </span>
-              <span className="hidden rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/70 sm:inline">
-                Coming soon
-              </span>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
+          <header className="flex items-center justify-between gap-4 fade-up">
+            <a className="text-3xl font-semibold tracking-tight" href="/">
+              Coverge
+            </a>
+            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/70">
               <a
                 className="rounded-full border border-white/15 bg-white/5 px-4 py-2 transition hover:bg-white/10"
                 href="/news"
@@ -71,18 +66,24 @@ export default function Home() {
               >
                 Contact
               </a>
-              <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white/60">
-                Private beta
-              </span>
             </div>
           </header>
 
           <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 lg:p-12">
             <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="space-y-8 fade-up fade-delay-1">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
-                  Built for entrepreneurs and innovators
+                <div
+                  className="self-end whitespace-nowrap text-right text-4xl font-semibold uppercase tracking-[0.25em] text-white/85 sm:text-5xl lg:text-6xl"
+                  style={{ textShadow: "0 0 18px rgba(123, 176, 255, 0.65)" }}
+                >
+                  Coming soon
                 </div>
+                <div className="mx-auto inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
+                  Private beta
+                </div>
+                <p className="font-mono text-xs uppercase tracking-[0.35em] text-white/70">
+                  Built by entrepreneurs, for entrepreneurs
+                </p>
                 <div className="space-y-6">
                 <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
                   A digital platform where ideas meet the people who help them
