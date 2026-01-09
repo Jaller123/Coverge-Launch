@@ -45,7 +45,7 @@ export default function ContactPage() {
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <div className="flex items-center gap-3">
             <a className="font-anton text-3xl tracking-tight" href="/">
-              Coverge
+              COVERGE
             </a>
             <span className="hidden rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/70 sm:inline">
               Contact
