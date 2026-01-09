@@ -79,7 +79,12 @@ export default function ContactPage() {
             follow up.
           </p>
 
-          <form className="mt-6 space-y-4">
+          <form
+            className="mt-6 space-y-4"
+            action="mailto:coverge.se@outlook.com"
+            method="post"
+            encType="text/plain"
+          >
             <label className="sr-only" htmlFor="contact-name">
               Name
             </label>

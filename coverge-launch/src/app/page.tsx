@@ -238,9 +238,9 @@ export default function Home() {
               </a>
               <a
                 className="text-white/70 hover:text-white"
-                href="mailto:hello@coverge.app"
+                href="mailto:coverge.se@outlook.com"
               >
-                hello@coverge.app
+                coverge.se@outlook.com
               </a>
             </div>
           </footer>
