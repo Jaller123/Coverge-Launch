@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070b1a;
+  --foreground: #f5f7ff;
+  --muted: rgba(245, 247, 255, 0.7);
+  --surface: rgba(12, 18, 40, 0.65);
+  --surface-strong: rgba(17, 25, 54, 0.85);
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #7bb0ff;
+  --accent-strong: #2f6bff;
+  --accent-soft: rgba(123, 176, 255, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sora);
+  --font-mono: var(--font-space-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.bg-coverge {
+  background-image:
+    radial-gradient(circle at top left, rgba(72, 103, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 70% 10%, rgba(123, 176, 255, 0.28), transparent 55%),
+    radial-gradient(circle at 40% 90%, rgba(255, 124, 203, 0.2), transparent 45%),
+    linear-gradient(135deg, #050814, #112762 55%, #2b66f5);
+}
+
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 80px rgba(3, 6, 20, 0.45);
+  backdrop-filter: blur(22px);
+}
+
+.glass-strong {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.soft-ring {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.fade-up {
+  animation: fade-up 0.9s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.36s;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
