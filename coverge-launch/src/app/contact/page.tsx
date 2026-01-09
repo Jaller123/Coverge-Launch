@@ -10,6 +10,10 @@ const heroVideos = [
 
 export default function ContactPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,6 +22,41 @@ export default function ContactPage() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("sending");
+    setStatusMessage("");
+
+    const formData = new FormData(event.currentTarget);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || "Unable to send message.");
+      }
+
+      event.currentTarget.reset();
+      setStatus("sent");
+      setStatusMessage("Thanks! Your message has been sent.");
+    } catch (error) {
+      setStatus("error");
+      setStatusMessage(
+        error instanceof Error ? error.message : "Unable to send message."
+      );
+    }
+  };
 
   return (
     <main className="relative min-h-screen text-white">
@@ -81,9 +120,10 @@ export default function ContactPage() {
 
           <form
             className="mt-6 space-y-4"
-            action="mailto:coverge.se@outlook.com"
+            action="/api/contact"
             method="post"
-            encType="text/plain"
+            autoComplete="on"
+            onSubmit={handleSubmit}
           >
             <label className="sr-only" htmlFor="contact-name">
               Name
@@ -93,6 +133,9 @@ export default function ContactPage() {
               id="contact-name"
               placeholder="Your name"
               type="text"
+              name="name"
+              autoComplete="name"
+              required
             />
             <label className="sr-only" htmlFor="contact-email">
               Email address
@@ -102,6 +145,9 @@ export default function ContactPage() {
               id="contact-email"
               placeholder="you@company.com"
               type="email"
+              name="email"
+              autoComplete="email"
+              required
             />
             <label className="sr-only" htmlFor="contact-message">
               Message
@@ -110,13 +156,25 @@ export default function ContactPage() {
               className="h-36 w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50"
               id="contact-message"
               placeholder="Tell us how we can help."
+              name="message"
+              required
             />
             <button className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-blue-100">
-              Send message
+              {status === "sending" ? "Sending..." : "Send message"}
             </button>
-            <p className="text-xs text-white/50">
-              Your message will be shared directly with the Coverge team.
-            </p>
+            {statusMessage ? (
+              <p
+                className={`text-xs ${
+                  status === "sent" ? "text-white/70" : "text-rose-200"
+                }`}
+              >
+                {statusMessage}
+              </p>
+            ) : (
+              <p className="text-xs text-white/50">
+                Your message will be shared directly with the Coverge team.
+              </p>
+            )}
           </form>
         </section>
       </div>
