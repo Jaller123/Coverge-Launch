@@ -10,6 +10,7 @@ const heroVideos = [
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [previewPlaying, setPreviewPlaying] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -130,6 +131,37 @@ export default function Home() {
                     <p className="text-xs uppercase tracking-[0.2em] text-white/50">
                       Funding focus
                     </p>
+                  </div>
+                </div>
+                <div className="glass-strong mx-auto w-full max-w-2xl overflow-hidden rounded-3xl">
+                  <div className="border-b border-white/10 bg-white/5 px-5 py-3 text-center">
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                      Product preview
+                    </p>
+                  </div>
+                  <div className="group relative">
+                    <video
+                      className="h-64 w-full object-cover sm:h-72 lg:h-80"
+                      controls
+                      preload="metadata"
+                      onPlay={() => setPreviewPlaying(true)}
+                      onPause={() => setPreviewPlaying(false)}
+                      onEnded={() => setPreviewPlaying(false)}
+                    >
+                      <source
+                        src="/Coverge-Launch-videos/VID_20260109_142148 (online-video-cutter.com).mp4"
+                        type="video/mp4"
+                      />
+                    </video>
+                    <div
+                      className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                        previewPlaying ? "opacity-0" : "opacity-100"
+                      }`}
+                    >
+                      <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/40 bg-white/10 text-white/80 backdrop-blur-sm">
+                        <span className="ml-1 text-3xl">▶</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
