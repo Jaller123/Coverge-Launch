@@ -55,6 +55,13 @@ export async function POST(request: Request) {
         subject: "You're on the Coverge waitlist",
         text: "Thanks for joining the Coverge waitlist. We'll be in touch soon.",
       });
+
+      await resend.emails.send({
+        from: resendFrom,
+        to: ["coverge.se@outlook.com"],
+        subject: "New waitlist signup",
+        text: `New waitlist signup: ${email}`,
+      });
     }
 
     return NextResponse.json({ ok: true });
