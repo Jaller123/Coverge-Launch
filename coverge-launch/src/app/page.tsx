@@ -11,6 +11,10 @@ const heroVideos = [
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [previewPlaying, setPreviewPlaying] = useState(false);
+  const [waitlistStatus, setWaitlistStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [waitlistMessage, setWaitlistMessage] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,6 +23,39 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleWaitlistSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    setWaitlistStatus("sending");
+    setWaitlistMessage("");
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") || "").trim();
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || "Unable to join the waitlist.");
+      }
+
+      event.currentTarget.reset();
+      setWaitlistStatus("sent");
+      setWaitlistMessage("Thanks! You are on the waitlist.");
+    } catch (error) {
+      setWaitlistStatus("error");
+      setWaitlistMessage(
+        error instanceof Error ? error.message : "Unable to join the waitlist."
+      );
+    }
+  };
 
   return (
     <main className="relative min-h-screen text-white">
@@ -96,7 +133,10 @@ export default function Home() {
                   impact.
                 </p>
                 </div>
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <form
+                  className="flex flex-col gap-3 sm:flex-row sm:items-center"
+                  onSubmit={handleWaitlistSubmit}
+                >
                   <label className="sr-only" htmlFor="waitlist-email">
                     Email address
                   </label>
@@ -105,14 +145,33 @@ export default function Home() {
                     id="waitlist-email"
                     placeholder="you@company.com"
                     type="email"
+                    name="email"
+                    required
                   />
-                  <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-blue-100">
-                    Join the waitlist
+                  <button
+                    className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-blue-100"
+                    type="submit"
+                  >
+                    {waitlistStatus === "sending"
+                      ? "Joining..."
+                      : "Join the waitlist"}
                   </button>
-                </div>
-                <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                  Early access - No spam
-                </p>
+                </form>
+                {waitlistMessage ? (
+                  <p
+                    className={`text-xs uppercase tracking-[0.3em] ${
+                      waitlistStatus === "sent"
+                        ? "text-white/70"
+                        : "text-rose-200"
+                    }`}
+                  >
+                    {waitlistMessage}
+                  </p>
+                ) : (
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                    Early access - No spam
+                  </p>
+                )}
                 <div className="grid gap-3 text-sm text-white/70 sm:grid-cols-3">
                   <div className="glass-strong rounded-2xl p-4">
                     <p className="text-2xl font-semibold text-white">6-12</p>
