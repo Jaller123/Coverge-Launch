@@ -31,7 +31,8 @@ export default function Home() {
     setWaitlistStatus("sending");
     setWaitlistMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const email = String(formData.get("email") || "").trim();
 
     try {
@@ -46,7 +47,7 @@ export default function Home() {
         throw new Error(data?.error || "Unable to join the waitlist.");
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setWaitlistStatus("sent");
       setWaitlistMessage("Thanks! You are on the waitlist.");
     } catch (error) {
